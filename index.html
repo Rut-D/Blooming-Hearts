@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blooming Hearts — Where Every Flower Tells a Story</title>
+<link rel="icon" type="image/png" href="final_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="toast-stack"></div>
+<div class="overlay" id="overlay"></div>
+<header>
+  <div class="nav-row">
+    <a href="#" class="logo" data-nav="home">
+    <img src="final_logo.png" alt="Blooming Hearts Logo">
+    <div class="logo-text">
+        Blooming <span class="sub">Hearts</span>
+    </div>
+</a>
+    <nav class="nav-links">
+      <a href="#" data-nav="home">Home</a>
+      <a href="#" data-nav="shop">Shop</a>
+      <a href="#" data-nav="home" data-anchor="best-sellers">Best Sellers</a>
+      <a href="#" data-nav="home" data-anchor="testimonials">Reviews</a>
+      <a href="#" data-nav="home" data-anchor="footer-contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="searchInput" type="text" placeholder="Search bouquets...">
+      </div>
+      <button class="btn-icon" id="wishNavBtn" title="Wishlist" style="position:relative;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        <span class="badge" id="wishBadge" style="display:none;">0</span>
+      </button>
+      <button class="btn-icon" id="cartNavBtn" title="Cart" style="position:relative;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="badge" id="cartBadge" style="display:none;">0</span>
+      </button>
+      <button class="btn-icon" id="profileNavBtn" title="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="hamburger" id="hamburgerBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="close-x" id="mobileNavClose">&times;</button>
+  <a href="#" data-nav="home">Home</a>
+  <a href="#" data-nav="shop">Shop</a>
+  <a href="#" data-nav="home" data-anchor="best-sellers">Best Sellers</a>
+  <a href="#" data-nav="home" data-anchor="testimonials">Reviews</a>
+  <div class="m-actions">
+    <button class="btn btn-gold" id="mobileCartBtn">View Cart</button>
+    <button class="btn btn-ghost" style="border-color:#fff;color:#fff;" id="mobileAccountBtn">My Account</button>
+  </div>
+</div>
+
+<!-- ============ HOME VIEW ============ -->
+<main id="view-home" class="view active">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">🌷 Fresh cut daily, delivered with care</span>
+        <h1>Blooming<span class="script">Hearts</span></h1>
+        <p class="tagline">Where every flower tells a story — handcrafted bouquets for the moments that matter most.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-nav="shop">Explore!</button>
+          <button class="btn btn-ghost" id="heroBestSellersBtn">Best Sellers</button>
+        </div>
+        <div class="hero-stats">
+          <div><strong>10+</strong><span>Bouquets Delivered</span></div>
+          <div><strong>4.5★</strong><span>Average Rating</span></div>
+          <div><strong>24h</strong><span>Same-Day Delivery</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="float-card fc1">🌸 Just Delivered to Priya!</div>
+        <div class="float-card fc2">💐 200+ Fresh Arrangements</div>
+        <div class="bouquet-stage sway" id="heroBouquet"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-strip">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+
+  <section class="categories">
+    <div class="section-head">
+      <span class="eyebrow">Shop by Occasion</span>
+      <h2>Find Your <span class="script">Perfect</span> Bloom</h2>
+    </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </section>
+
+  <section class="products-section" id="best-sellers">
+    <div class="section-head">
+      <span class="eyebrow">Handpicked for you</span>
+      <h2>Our <span class="script">Best</span> Sellers</h2>
+      <div class="divider-heart"><svg viewBox="0 0 24 24" fill="var(--rose)"><path d="M12 21s-7.5-4.6-10-9.3C.4 8 2 4.5 5.4 4A5 5 0 0 1 12 7a5 5 0 0 1 6.6-3c3.4.5 5 4 3.4 7.7C19.5 16.4 12 21 12 21z"/></svg></div>
+      <p>Loved again and again — these arrangements sell out fastest for a reason.</p>
+    </div>
+    <div class="product-grid" id="bestSellerGrid"></div>
+  </section>
+
+  <section class="promo-banner">
+    <div class="promo-copy">
+      <span class="eyebrow" style="color:var(--gold-light);">Limited Time</span>
+      <h2>Get <span class="script">15% off</span> your first bouquet</h2>
+      <div class="countdown" id="countdown">
+        <div class="cbox"><strong id="cd-h">00</strong><span>Hours</span></div>
+        <div class="cbox"><strong id="cd-m">00</strong><span>Mins</span></div>
+        <div class="cbox"><strong id="cd-s">00</strong><span>Secs</span></div>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-gold" id="promoShopBtn">Shop Now!</button>
+      <p style="color:rgba(255,255,255,.7);font-size:12px;margin-top:12px;">Use code <strong style="color:#fff;">BLOOM15</strong> at checkout</p>
+    </div>
+  </section>
+
+  <section class="products-section" style="padding-top:20px;">
+    <div class="section-head">
+      <span class="eyebrow">Fresh arrivals</span>
+      <h2>New This <span class="script">Season</span></h2>
+    </div>
+    <div class="product-grid" id="newArrivalsGrid"></div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <div class="section-head">
+      <span class="eyebrow">Kind words</span>
+      <h2>Stories from Our <span class="script">Customers</span></h2>
+    </div>
+    <div class="testi-track-wrap">
+      <div class="testi-track" id="testiTrack"></div>
+    </div>
+    <div class="testi-nav">
+      <button class="btn-icon" id="testiPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+      <button class="btn-icon" id="testiNext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="newsletter-box">
+      <span class="eyebrow">Stay in bloom</span>
+      <h2 style="font-family:var(--ff-display);font-size:28px;color:var(--plum-deep);margin-top:10px;">Get <span class="script" style="font-family:var(--ff-script);color:var(--rose);font-size:1.2em;">10% off</span> your next order</h2>
+      <p style="color:var(--ink-soft);font-size:13.5px;margin-top:10px;">Join our list for seasonal drops, care tips, and early access to limited blooms.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="you@example.com" required id="newsletterEmail">
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ SHOP VIEW ============ -->
+<main id="view-shop" class="view">
+  <section class="shop-hero">
+    <span class="script">Browse</span>
+    <h1>All Bouquets & Gifts</h1>
+    <p class="breadcrumb">Home / Shop</p>
+  </section>
+  <section class="shop-layout">
+    <aside class="filter-panel">
+      <h4>Category</h4>
+      <div class="filter-group" id="filterCategoryGroup"></div>
+      <h4>Price Range</h4>
+      <div class="filter-group">
+        <input type="range" id="priceRange" min="500" max="2000" value="2000" step="50">
+        <div class="price-values"><span>₹500</span><span id="priceRangeVal">up to ₹2000</span></div>
+      </div>
+      <h4>Occasion</h4>
+      <div class="filter-group" id="filterOccasionGroup"></div>
+      <button class="btn btn-ghost btn-block btn-sm" id="clearFiltersBtn">Clear Filters</button>
+    </aside>
+    <div>
+      <div class="shop-toolbar">
+        <span class="count" id="resultCount">Showing all products</span>
+        <select class="sort-select" id="sortSelect">
+          <option value="featured">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Highest Rated</option>
+          <option value="name">Name: A–Z</option>
+        </select>
+      </div>
+      <div class="shop-product-grid" id="shopGrid"></div>
+      <div class="load-more-wrap"><button class="btn btn-ghost" id="loadMoreBtn">Load More</button></div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ CHECKOUT VIEW ============ -->
+<main id="view-checkout" class="view">
+  <section class="shop-hero">
+    <span class="script">Almost there</span>
+    <h1>Checkout</h1>
+  </section>
+  <div class="checkout-layout">
+    <div>
+      <div class="checkout-steps">
+        <div class="step active">1. Delivery Details</div>
+        <div class="step">2. Review</div>
+        <div class="step">3. Confirmation</div>
+      </div>
+      <form id="checkoutForm">
+        <div class="form-card">
+          <h4>💐 Delivery Address</h4>
+          <div class="form-grid">
+            <div class="field full"><label>Full Name</label><input required name="name" placeholder="Your name"></div>
+            <div class="field full"><label>Phone Number</label><input required name="phone" type="tel" placeholder="10-digit mobile number" pattern="[0-9]{10}"></div>
+            <div class="field full"><label>Address</label><input required name="address" placeholder="House no, street, area"></div>
+            <div class="field"><label>City</label><input required name="city" placeholder="City"></div>
+            <div class="field"><label>Pincode</label><input required name="pincode" placeholder="Pincode" pattern="[0-9]{6}"></div>
+          </div>
+        </div>
+        <div class="form-card">
+          <h4>🕊️ Gift Message (optional)</h4>
+          <div class="field full"><textarea name="giftMessage" rows="3" placeholder="Write a little note for the recipient..." style="width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid rgba(107,23,67,.18);outline:none;font-size:14px;resize:vertical;"></textarea></div>
+          <div class="form-grid" style="margin-top:16px;">
+            <div class="field"><label>Delivery Date</label><input required name="date" type="date"></div>
+            <div class="field"><label>Time Slot</label>
+              <select name="slot" required style="width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid rgba(107,23,67,.18);outline:none;font-size:14px;">
+                <option value="">Select a slot</option>
+                <option>9 AM – 12 PM</option>
+                <option>12 PM – 3 PM</option>
+                <option>3 PM – 6 PM</option>
+                <option>6 PM – 9 PM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-card">
+          <h4>💳 Payment Method</h4>
+          <div class="filter-group" id="paymentOptions"></div>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" style="padding:17px;">Place Order</button>
+      </form>
+    </div>
+    <div class="order-summary">
+      <h4>Order Summary</h4>
+      <div id="checkoutItems"></div>
+      <div style="margin-top:16px;">
+        <div class="summary-row"><span>Subtotal</span><span id="co-subtotal">₹0</span></div>
+        <div class="summary-row"><span>Delivery Fee</span><span id="co-delivery">₹0</span></div>
+        <div class="summary-row"><span>Discount <span id="co-promo-tag" style="color:var(--leaf);"></span></span><span id="co-discount">−₹0</span></div>
+        <div class="summary-row total"><span>Total</span><span id="co-total">₹0</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ============ SUCCESS VIEW ============ -->
+<main id="view-success" class="view">
+  <div class="success-screen">
+    <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2>Your flowers are on their way!</h2>
+    <p>Thank you — your order has been placed. We'll start hand-tying your bouquet right away and keep it fresh until it reaches your door.</p>
+    <div class="order-id-box" id="orderIdBox">#BH-000000</div>
+    <div style="display:flex;gap:12px;justify-content:center;">
+      <button class="btn btn-primary" data-nav="shop">Continue Shopping</button>
+      <button class="btn btn-ghost" id="viewOrdersBtn">View My Orders</button>
+    </div>
+  </div>
+</main>
+
+<!-- ============ PROFILE VIEW ============ -->
+<main id="view-profile" class="view">
+  <section class="profile-hero">
+    <div class="profile-hero-inner">
+      <div class="profile-avatar" id="profileAvatarInitial">?</div>
+      <div>
+        <h2 id="profileGreetName">Welcome back!</h2>
+        <p id="profileGreetEmail">—</p>
+      </div>
+    </div>
+  </section>
+  <div class="profile-layout">
+    <div class="profile-tabs">
+      <button class="active" data-tab="orders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7 12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg> My Orders</button>
+      <button data-tab="wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> Wishlist</button>
+      <button data-tab="addresses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Addresses</button>
+      <button data-tab="account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Account</button>
+      <button class="logout" id="logoutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg> Log Out</button>
+    </div>
+    <div>
+      <div class="profile-panel active" id="panel-orders">
+        <div id="ordersList"></div>
+      </div>
+      <div class="profile-panel" id="panel-wishlist">
+        <div class="wishlist-grid" id="wishlistGrid"></div>
+      </div>
+      <div class="profile-panel" id="panel-addresses">
+        <div id="addressList"></div>
+        <button class="btn btn-ghost btn-sm" id="addAddressBtn">+ Add New Address</button>
+      </div>
+      <div class="profile-panel" id="panel-account">
+        <div class="form-card">
+          <h4>Account Details</h4>
+          <form id="accountForm">
+            <div class="form-grid">
+              <div class="field"><label>Full Name</label><input name="name" id="accName"></div>
+              <div class="field"><label>Email</label><input name="email" id="accEmail" disabled></div>
+              <div class="field"><label>Phone</label><input name="phone" id="accPhone" placeholder="Add phone number"></div>
+            </div>
+            <button class="btn btn-primary btn-sm" type="submit" style="margin-top:8px;">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer id="footer-contact">
+  <div class="footer-grid">
+    <div>
+      <div class="logo">Blooming <span class="sub">Hearts</span></div>
+      <p class="blurb">Handcrafted bouquets for birthdays, anniversaries, weddings, and every beautiful reason to say it with flowers.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 22 12 12M12 12a3 3 0 1 0 3-3"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#" data-nav="shop">All Bouquets</a></li>
+        <li><a href="#" data-nav="home" data-anchor="best-sellers">Best Sellers</a></li>
+        <li><a href="#" data-nav="shop">Gift Combos</a></li>
+        <li><a href="#" data-nav="shop">New Arrivals</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Track My Order</a></li>
+        <li><a href="#">Delivery Info</a></li>
+        <li><a href="#">Care Guide</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Visit Us</h4>
+      <ul>
+        <li style="color:rgba(255,240,245,.68);font-size:13.5px;">12 Petal Lane, Mumbai, MH</li>
+        <li style="color:rgba(255,240,245,.68);font-size:13.5px;">hello@bloominghearts.example</li>
+        <li style="color:rgba(255,240,245,.68);font-size:13.5px;">Open daily · 9am – 9pm</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Blooming Hearts. All rights reserved.</span>
+    <span>Made with 🌸 for people who say it with flowers.</span>
+  </div>
+</footer>
+
+<!-- ============ CART DRAWER ============ -->
+<aside class="drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3>Your Cart</h3>
+    <button class="drawer-close" id="closeCart">&times;</button>
+  </div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot"></div>
+</aside>
+
+<!-- ============ AUTH MODAL ============ -->
+<div class="modal" id="authModal">
+  <button class="modal-close" id="authClose">&times;</button>
+  <div class="modal-art">
+    <div class="quote">
+      <span class="script">Every bloom<br>has a story</span>
+      <p>Sign in to track your orders, save your favorite bouquets, and check out faster next time.</p>
+    </div>
+  </div>
+  <div class="modal-form">
+    <div class="auth-tabs">
+      <button id="tabLogin" class="active">Login</button>
+      <button id="tabSignup">Sign Up</button>
+    </div>
+    <form id="loginForm">
+      <div class="field" id="loginEmailField">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <div class="hint">We couldn't find an account with that email.</div>
+      </div>
+      <div class="field" id="loginPassField">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+        <div class="hint">That password doesn't match.</div>
+      </div>
+      <label class="field-row-check"><input type="checkbox" name="keep"> Keep me logged in</label>
+      <button class="btn btn-primary btn-block" type="submit">Login</button>
+      <p class="auth-switch">Don't have an account? <a href="#" id="goSignup">Sign Up</a></p>
+    </form>
+    <form id="signupForm" style="display:none;">
+      <div class="field" id="signupNameField">
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Your full name" required>
+      </div>
+      <div class="field" id="signupEmailField">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <div class="hint">An account with this email already exists.</div>
+      </div>
+      <div class="field" id="signupPassField">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="At least 6 characters" required minlength="6">
+        <div class="hint">Password must be at least 6 characters.</div>
+      </div>
+      <label class="field-row-check"><input type="checkbox" name="remember" checked> Remember me</label>
+      <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+      <p class="auth-switch">Already have an account? <a href="#" id="goLogin">Login</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- ============ PRODUCT QUICKVIEW MODAL ============ -->
+<div class="modal qv-modal" id="qvModal">
+  <button class="modal-close" id="qvClose">&times;</button>
+  <div class="qv-media" id="qvMedia"></div>
+  <div class="qv-body">
+    <span class="product-cat" id="qvCat"></span>
+    <h2 id="qvName"></h2>
+    <div class="product-stars" id="qvStars"></div>
+    <div class="price-row"><span class="price" id="qvPrice"></span><span class="price-old" id="qvOldPrice"></span></div>
+    <p class="desc" id="qvDesc"></p>
+    <div class="qv-meta">
+      <div><strong>🚚 Same-day</strong>Delivery available</div>
+      <div><strong>🌿 Fresh cut</strong>Guaranteed 7 days</div>
+      <div><strong>💌 Free note</strong>Card included</div>
+    </div>
+    <div class="qv-actions">
+      <div class="qv-qty">
+        <button type="button" id="qvMinus">−</button>
+        <span id="qvQtyVal">1</span>
+        <button type="button" id="qvPlus">+</button>
+      </div>
+      <button class="btn btn-primary" id="qvAddBtn" style="flex:1;">Add to Cart</button>
+      <button class="btn-icon" id="qvWishBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
